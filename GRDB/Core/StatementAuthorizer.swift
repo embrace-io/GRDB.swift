@@ -1,5 +1,17 @@
-#if os(Linux)
+#if SWIFT_PACKAGE
+import GRDBSQLite
+#elseif GRDBCIPHER
+import SQLCipher
+#elseif !GRDBCUSTOMSQLITE && !GRDBCIPHER
+import SQLite3
+#endif
+
+#if canImport(string_h)
+import string_h
+#elseif os(Linux)
 import Glibc
+#elseif os(macOS) || os(iOS) || os(watchOS) || os(tvOS) || os(visionOS)
+import Darwin
 #endif
 
 /// `StatementAuthorizer` provides information about compiled database

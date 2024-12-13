@@ -1,5 +1,13 @@
+#if SWIFT_PACKAGE
+import GRDBSQLite
+#elseif GRDBCIPHER
+import SQLCipher
+#elseif !GRDBCUSTOMSQLITE && !GRDBCIPHER
+import SQLite3
+#endif
+
 extension Database {
-    
+
     // MARK: - Database Observation
     
     /// Adds a transaction observer on the database connection, so that it
